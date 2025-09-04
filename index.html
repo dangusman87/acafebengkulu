@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A'Cafe - Kopi Stamina Premium Para Juara</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A'Cafe adalah kopi stamina premium dengan ginseng Korea dan herbal pilihan untuk meningkatkan vitalitas, performa, dan keharmonisan rumah tangga. Aman, BPOM, dan Halal.">
+    <meta name="keywords" content="kopi stamina, kopi vitalitas, kopi pria, A'Cafe, ginseng, herbal, kuat tahan lama, disfungsi ereksi, kopi bengkulu">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8F4E3; /* Changed default background to a light cream for contrast */
+            color: #4a2c2a;
+        }
+        .hero-bg-gradient {
+            background-image: radial-gradient(circle at 85% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 40%);
+        }
+        /* Custom colors for the new section */
+        .text-coffee-dark {
+            color: #4a2c2a;
+        }
+        .bg-coffee-dark {
+            background-color: #4a2c2a;
+        }
+        .list-bullet-blue li::before {
+            content: '•';
+            color: #2563eb; /* blue-600 */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        /* Styles for Promo Ticker - FINAL FIX v2 */
+        .promo-ticker{
+            --bg:#6f442f;
+            --fg:#ffffff;
+            --gap: 3rem;
+            --speed: 45s;
+            width:100%;
+            overflow:hidden;
+            background:var(--bg);
+            color:var(--fg);
+            font:500 15px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+            letter-spacing:.2px;
+            padding:10px 0;
+            border-top:1px solid rgba(255,255,255,.15);
+        }
+        .promo-track{
+            display: inline-flex; /* CRUCIAL FIX: Ensures track width is based on content, not container */
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            animation: marquee var(--speed) linear infinite;
+        }
+        .promo-seq {
+            display: flex;
+            align-items: center;
+            gap: var(--gap); 
+            padding-right: var(--gap);
+            flex-shrink: 0; 
+        }
+        .promo-ticker:hover .promo-track{ animation-play-state: paused; }
+
+        .promo-cta{
+            display:inline-block;
+            padding:.35rem .7rem;
+            margin-left:.5rem;
+            background:#ffd166;
+            color:#3b2b22;
+            text-decoration:none;
+            border-radius:999px;
+            font-weight:700;
+        }
+
+        .dot{opacity:.6}
+
+        @keyframes marquee{
+            from { transform: translateX(0); }
+            to{ transform: translateX(-50%); } 
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            .promo-track{ animation: none; padding-left:0 }
+        }
+
+        @media (min-width:768px){ .promo-ticker{ font-size:16px } }
+
+        /* Styles for NEW Ingredients Section */
+        .ingredients-v2-section {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+        .ingredients-v2-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            animation: fadeInDown 1s ease-out;
+        }
+        .ingredients-v2-header h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: #3e2f23;
+        }
+        .ingredients-v2-header p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #555;
+            font-size: 15px;
+        }
+        .ingredients-v2-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .ingredients-v2-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards;
+            display: flex;
+            flex-direction: column;
+            width: 320px;
+        }
+        .ingredients-v2-card:nth-child(1) { animation-delay: 0.1s; }
+        .ingredients-v2-card:nth-child(2) { animation-delay: 0.2s; }
+        .ingredients-v2-card:nth-child(3) { animation-delay: 0.3s; }
+        .ingredients-v2-card:nth-child(4) { animation-delay: 0.4s; }
+        .ingredients-v2-card:nth-child(5) { animation-delay: 0.5s; }
+        .ingredients-v2-card:nth-child(6) { animation-delay: 0.6s; }
+        .ingredients-v2-card:nth-child(7) { animation-delay: 0.7s; }
+        .ingredients-v2-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .ingredients-v2-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .ingredients-v2-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 3px solid #f5f5f5;
+        }
+        .ingredients-v2-card-content {
+            padding: 15px;
+            flex: 1;
+        }
+        .ingredients-v2-card-content h3 {
+            margin: 10px 0;
+            color: #3e2f23;
+            font-size: 18px;
+        }
+        .ingredients-v2-card-content p {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes hero-fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-hero-text {
+            animation: hero-fade-in 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+        .animate-hero-image {
+            animation: hero-fade-in 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+
+        /* Styles for Video Sliders */
+        .video-slider-section{
+            background-color: #f5f2ed;
+            padding: 80px 20px;
+        }
+        .video-slider-container {
+            position: relative;
+            max-width: 420px; /* Lebar satu video */
+            margin: auto;
+            overflow: hidden;
+        }
+        @media (min-width: 900px) {
+            .video-slider-container {
+                max-width: 840px; /* Lebar dua video */
+            }
+        }
+        .video-slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .video-slider-slide {
+            min-width: 420px; /* Lebar video + padding */
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .video-slider-slide .yt-player {
+            width: 100%;
+            height: 225px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .video-slider-nav {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .video-slider-nav button {
+            background-color: #a56532;
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .video-slider-nav button:hover {
+            background-color: #7b4b2a;
+        }
+
+        /* Styles for FAQ Section */
+        .faq-container {
+            max-width: 700px;
+            width: 100%;
+        }
+        .faq-item {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            border: 1px solid #e2d9c2;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px 20px;
+            font-weight: 600; /* semibold */
+            font-size: 16px;
+            user-select: none;
+            color: #4a2c2a;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0 20px;
+            font-size: 15px;
+            color: #555;
+            opacity: 0;
+        }
+        .faq-answer.open {
+            padding: 0px 20px 15px 20px;
+            max-height: 500px;
+            opacity: 1;
+        }
+        .faq-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+
+        /* New styles for background */
+        .section-with-bg {
+            position: relative;
+            background-image: url('https://www.availacafe.com/assets/images/footer.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed; /* Creates a subtle parallax effect */
+            z-index: 1;
+        }
+
+        .section-with-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Overlay with a semi-transparent version of the body's background color */
+            background-color: rgba(248, 244, 227, 0.90); 
+            z-index: -1;
+        }
+
+        /* Animation for glowing buttons */
+        @keyframes glowing-pulse {
+            0% {
+                box-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24;
+            }
+            50% {
+                box-shadow: 0 0 20px #fde68a, 0 0 30px #fde68a;
+            }
+            100% {
+                box-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24;
+            }
+        }
+        .animate-glowing-pulse {
+            animation: glowing-pulse 1.8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- ====== STICKY HEADER CONTAINER ====== -->
+    <div class="sticky top-0 z-50 shadow-lg">
+        <!-- Header & Navigation -->
+        <div style="background-color: #634832;">
+            <div class="container mx-auto px-6 py-4">
+                <header class="flex justify-between items-center">
+                    <!-- Logo -->
+                    <div>
+                        <img src="https://www.availacafe.com/assets/images/logo.png" alt="Logo A'Cafe" class="h-10 md:h-12">
+                    </div>
+    
+                    <!-- Navigasi Menu Desktop -->
+                    <nav class="hidden lg:flex items-center space-x-8">
+                        <a href="#" class="text-white hover:text-amber-200 transition duration-300">Home</a>
+                        <a href="#tentang" class="text-white hover:text-amber-200 transition duration-300">Tentang</a>
+                        <a href="#rahasia-stamina" class="text-white hover:text-amber-200 transition duration-300">Produk</a>
+                        <a href="#video" class="text-white hover:text-amber-200 transition duration-300">Video</a>
+                        <a href="#testimoni" class="text-white hover:text-amber-200 transition duration-300">Testimoni</a>
+                        <a href="#kontak" class="text-white hover:text-amber-200 transition duration-300">Kontak</a>
+                        <a href="#harga" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-lg">Order</a>
+                    </nav>
+                    
+                    <!-- Tombol Hamburger untuk Mobile -->
+                    <div class="lg:hidden">
+                        <button id="menu-btn" class="text-white focus:outline-none">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        </button>
+                    </div>
+                </header>
+                
+                <!-- Menu Mobile -->
+                <div id="mobile-menu" class="hidden lg:hidden mt-4">
+                     <a href="#" class="block text-center text-white py-2 hover:bg-white/10 rounded">Home</a>
+                     <a href="#tentang" class="block text-center text-white py-2 hover:bg-white/10 rounded">Tentang</a>
+                     <a href="#rahasia-stamina" class="block text-center text-white py-2 hover:bg-white/10 rounded">Produk</a>
+                     <a href="#video" class="block text-center text-white py-2 hover:bg-white/10 rounded">Video</a>
+                     <a href="#testimoni" class="block text-center text-white py-2 hover:bg-white/10 rounded">Testimoni</a>
+                     <a href="#kontak" class="block text-center text-white py-2 hover:bg-white/10 rounded">Kontak</a>
+                     <a href="#harga" class="block text-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 shadow-lg mt-2">Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ====== END STICKY HEADER ====== -->
+
+    <!-- ====== PAGE CONTENT START ====== -->
+
+    <!-- 1. Modern Hero Section -->
+    <section class="text-white py-20" style="background: #2a1a1a;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="text-center md:text-left animate-hero-text">
+                    <h2 class="text-4xl lg:text-5xl font-extrabold text-amber-400 tracking-wider" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                        Kopi Cinta Avail A'Cafe
+                    </h2>
+                    <p class="mt-4 text-lg lg:text-xl text-gray-300">
+                        Rasakan perpaduan kopi premium dan herbal pilihan yang diracik khusus untuk vitalitas dan performa puncak Anda.
+                    </p>
+                    <a href="#harga" class="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-10 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105 animate-pulse">
+                        Lihat Penawaran
+                    </a>
+                    <!-- Visitor Counter -->
+                    <div id="visitor-counter-container" class="mt-6 text-amber-200/80 text-sm animate-hero-text" style="animation-delay: 1.1s;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block -mt-1 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                        </svg>
+                        Telah Dilihat <span id="visitor-count" class="font-bold text-white">1478</span> Kali
+                    </div>
+                </div>
+                <!-- Image Content -->
+                <div class="flex justify-center animate-hero-image">
+                    <img src="https://www.availacafe.com/assets/page/Product.png" alt="Produk A'Cafe disajikan dengan elegan" class="rounded-lg shadow-2xl max-h-[500px] w-auto">
+                </div>
+            </div>
+
+            <!-- Three Icons Section -->
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Icon 1: Kekuatan Alami -->
+                <div class="animate-hero-text" style="animation-delay: 0.5s;">
+                    <div class="flex items-center justify-center h-16 w-16 mx-auto bg-amber-400/10 rounded-full mb-4 border-2 border-amber-400/50">
+                       <svg class="w-8 h-8 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400">Kekuatan Alami</h3>
+                    <p class="text-gray-400 text-sm mt-1">Dari herbal pilihan tanpa efek samping.</p>
+                </div>
+                <!-- Icon 2: Sensasi Maksimal -->
+                <div class="animate-hero-text" style="animation-delay: 0.7s;">
+                    <div class="flex items-center justify-center h-16 w-16 mx-auto bg-amber-400/10 rounded-full mb-4 border-2 border-amber-400/50">
+                         <svg class="w-8 h-8 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400">Sensasi Maksimal</h3>
+                    <p class="text-gray-400 text-sm mt-1">Tingkatkan performa dan durasi.</p>
+                </div>
+                <!-- Icon 3: Hubungan Harmonis -->
+                <div class="animate-hero-text" style="animation-delay: 0.9s;">
+                    <div class="flex items-center justify-center h-16 w-16 mx-auto bg-amber-400/10 rounded-full mb-4 border-2 border-amber-400/50">
+                       <svg class="w-8 h-8 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-400">Hubungan Harmonis</h3>
+                    <p class="text-gray-400 text-sm mt-1">Jaga keintiman bersama pasangan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Problem & Issues Section -->
+    <section id="tentang" class="py-20 section-with-bg">
+        <div class="container mx-auto px-6">
+            <!-- Judul Section -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold uppercase text-coffee-dark">Apakah Anda Menghadapi Masalah Ini?</h2>
+                <p class="mt-4 text-2xl font-semibold text-blue-900">Mau buat istri puas di ranjang, tapi…</p>
+            </div>
+
+            <!-- Konten 3 Kolom -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Kolom 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1756980009/Gemini_Generated_Image_gtb27fgtb27fgtb2_d3klld.png" alt="Pria lemas di ranjang" class="rounded-md mb-6 mx-auto">
+                    <ul class="text-gray-700 text-left space-y-3 list-bullet-blue pl-5">
+                        <li>Stamina sering nge-drop saat berhubungan sex.</li>
+                        <li>Gak kuat dan tahan lama.</li>
+                        <li>Kurangnya kemampuan untuk mencapai orgasme atau ejakulasi.</li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1756980135/Gemini_Generated_Image_s6na6ps6na6ps6na_dftuzb.png" alt="Konflik pasangan" class="rounded-md mb-6 mx-auto">
+                     <ul class="text-gray-700 text-left space-y-3 list-bullet-blue pl-5">
+                        <li>Gairah berhubungan seksual menurun.</li>
+                        <li>Tidak mampu menjaga ereksi (disfungsi ereksi atau impoten).</li>
+                        <li>Kualitas sperma nggak bagus.</li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1756980188/Screenshot_2025-08-30_at_22-46-05_Urusan_Ranjang_Jadi_Sumber_Petaka_Rumah_Tangga_ymvvqy.png" alt="Artikel berita masalah ranjang" class="rounded-md mb-6 mx-auto">
+                     <ul class="text-gray-700 text-left space-y-3 list-bullet-blue pl-5">
+                        <li>Ini yang terjadi kalau menyepelekan masalah di atas ranjang.</li>
+                        <li>Ereksi yang baik dan sehat memerlukan kondisi fisik & mental yang prima, termasuk kesehatan pembuluh darah, saraf, hormon, dan faktor psikologis.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Section: Kenapa Wajib -->
+    <section id="produk" class="text-gray-800 py-20 section-with-bg">
+      <div class="max-w-5xl mx-auto px-5 text-center">
+        <h1 class="text-3xl font-bold text-gray-900">
+          Mengapa Anda Wajib Mencoba A'Cafe?
+        </h1>
+        <p class="text-lg text-gray-700 mt-2">
+          Rahasia Stamina Prima di Atas Ranjang!
+        </p>
+
+        <!-- Grid dengan 2 kolom -->
+        <div class="grid md:grid-cols-2 gap-8 mt-12 items-start">
+          <!-- Gambar -->
+          <div class="flex justify-center">
+            <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1756978235/Gemini_Generated_Image_epqhflepqhflepqh_qyi7o5.png" alt="Wanita tersenyum memegang produk A'Cafe" class="rounded-xl shadow-lg w-full h-full object-cover" />
+          </div>
+
+          <!-- Konten -->
+          <div class="space-y-6 text-left">
+            <!-- Point 1 -->
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 bg-yellow-400 text-white font-bold w-8 h-8 flex items-center justify-center rounded-full text-lg">1</div>
+              <p class="text-base mt-1">
+                A'cafe - Serbuk Kopi yang dapat meningkatkan stamina dengan bahan premium dan aman untuk dikonsumsi
+              </p>
+            </div>
+
+            <!-- Point 2 -->
+            <div class="flex items-start space-x-4">
+               <div class="flex-shrink-0 bg-yellow-400 text-white font-bold w-8 h-8 flex items-center justify-center rounded-full text-lg">2</div>
+              <div class="text-base mt-1">
+                <p>A'cafe mengatasi masalah disfungsi ereksi langsung ke sumbernya, seperti:</p>
+                <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-600">
+                  <li>Melancarkan aliran darah ke seluruh tubuh termasuk organ reproduksi</li>
+                  <li>Meningkatkan kesehatan otak dan daya ingat</li>
+                  <li>Meningkatkan kadar hormon</li>
+                  <li>Memperbaiki kualitas sperma</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Point 3 -->
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 bg-yellow-400 text-white font-bold w-8 h-8 flex items-center justify-center rounded-full text-lg">3</div>
+              <p class="text-base mt-1">
+                Cukup mengonsumsi 1 sachet, manfaatnya bisa kamu rasakan sampai 3 hari!!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. NEW Attractive Benefits Section -->
+    <section class="py-20 section-with-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-coffee-dark mb-4">Kenapa A'Cafe Adalah Pilihan Tepat?</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-16">Dibuat dari bahan premium yang telah teruji untuk memberikan manfaat terbaik bagi stamina dan kesehatan Anda secara menyeluruh.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 text-left">
+                
+                <!-- Point 1 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.884 11.945l.003.003.002.002a.5.5 0 01.316.632l-1.681 5.952a.5.5 0 01-.84.223l-1.33-1.662a.5.5 0 01.223-.84l5.952-1.681a.5.5 0 01.632.316z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.252A5.486 5.486 0 0012 2.75c-1.722 0-3.324.793-4.385 2.067C6.555 6.096 6 7.48 6 8.875c0 1.743.83 3.324 2.115 4.385C9.176 14.17 10.56 14.75 12 14.75c1.722 0 3.324-.793-4.385-2.067C17.445 11.404 18 10.02 18 8.625c0-1.743-.83-3.324-2.115-4.385z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Bahan Alami Pilihan</h3>
+                        <p class="mt-1 text-gray-600">A’Cafe mengandung bahan-bahan yang alami sehingga lebih aman untuk dikonsumsi.</p>
+                    </div>
+                </div>
+
+                <!-- Point 2 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Mengatasi Hingga ke Akar</h3>
+                        <p class="mt-1 text-gray-600">Mengatasi masalah yang menyebabkan gangguan seksual pria sehingga tidak hanya sekedar meningkatkan staminanya.</p>
+                    </div>
+                </div>
+
+                <!-- Point 3 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 text-indigo-600">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                           </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Aman untuk Lambung</h3>
+                        <p class="mt-1 text-gray-600">Aman untuk dikonsumsi penderita gangguan lambung.</p>
+                    </div>
+                </div>
+                
+                <!-- Point 4 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-pink-100 text-pink-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9m9-9h.008v.008H12V3z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Aman untuk Penderita Diabetes</h3>
+                        <p class="mt-1 text-gray-600">Juga aman untuk penderita diabetes karena menggunakan gula stevia.</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Tersertifikasi BPOM & Halal</h3>
+                        <p class="mt-1 text-gray-600">Sudah tersertifikasi BPOM dan Halal MUI, sehingga aman untuk penggunaan jangka panjang.</p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                             </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Meningkatkan Kesehatan Otak</h3>
+                        <p class="mt-1 text-gray-600">Membantu meningkatkan kesehatan otak dan daya ingat.</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 text-indigo-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.092 1.209-.138 2.43-.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7zM12 12h.008v.008H12V12z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Mencegah Gangguan Prostat</h3>
+                        <p class="mt-1 text-gray-600">Membantu mencegah gangguan pada prostat.</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 6 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-pink-100 text-pink-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-3.797z" />
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Menjaga Keharmonisan</h3>
+                        <p class="mt-1 text-gray-600">Membantu meningkatkan gairah dan performa seksual sehingga menjaga keharmonisan rumah tangga.</p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 7 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-cyan-100 text-cyan-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Memperbaiki Kualitas Sperma</h3>
+                        <p class="mt-1 text-gray-600">Membantu memperbaiki kualitas sperma dan meningkatkan kesuburan pria.</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 8 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-teal-100 text-teal-600">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-3.75-2.25M21 18l-3.75-2.25" />
+                             </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Mengatasi Disfungsi Seksual</h3>
+                        <p class="mt-1 text-gray-600">Membantu mengatasi masalah disfungsi seksual langsung ke penyebabnya.</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 9 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-3.797zM12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Meningkatkan Produksi Hormon</h3>
+                        <p class="mt-1 text-gray-600">Membantu meningkatkan produksi hormon seksual pria dan wanita.</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 10 -->
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-coffee-dark">Mengurangi Nyeri Sendi</h3>
+                        <p class="mt-1 text-gray-600">Membantu mengurangi nyeri sendi dan tulang.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. NEW Ingredients Section V2 -->
+    <section id="rahasia-stamina" class="ingredients-v2-section section-with-bg">
+        <header class="ingredients-v2-header">
+            <h1 class="text-3xl font-extrabold uppercase" style="color: #3e2f23; text-shadow: 1px 1px 3px rgba(0,0,0,0.1);">RAHASIA STAMINA TANGGUH ADA DI BAHAN PREMIUM AVAIL COFFEE!</h1>
+            <p>Avail A’cafe diformulasikan dengan Ginseng asal Korea dengan waktu penanaman mencapai 6 tahun. Serta dilengkapi dengan 7 bahan premium lainnya untuk mengoptimalkan khasiat dan memelihara kesehatan secara menyeluruh, serta memperbaiki kualitas kehidupan seksual secara jangka panjang.</p>
+        </header>
+    
+        <div class="ingredients-v2-container">
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/panax-gingseng.jpg" alt="Korean Panax Ginseng">
+              <div class="ingredients-v2-card-content">
+                <h3>Korean Panax Ginseng</h3>
+                <p>Mengandung senyawa ginsenosida dan gintonin yang berfungsi untuk merangsang aliran darah ke seluruh tubuh, mencegah Ejakulasi dini & Meringankan gejala Menopause.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/robusta.jpg" alt="Perpaduan Biji Kopi">
+              <div class="ingredients-v2-card-content">
+                <h3>Perpaduan Biji Kopi Arabica & Robusta</h3>
+                <p>Mengandung banyak antioksidan yang baik untuk kesehatan tubuh dan memiliki manfaat kesehatan seperti meningkatkan energi, menjaga kesehatan jantung dan meningkatkan fungsi otak.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/guarana.jpg" alt="Guarana">
+              <div class="ingredients-v2-card-content">
+                <h3>Guarana</h3>
+                <p>Untuk meningkatkan kemampuan otak dan daya ingat, serta berfungsi untuk menambah energi, stamina, meningkatkan gairah seks dan meningkatkan kadar hormon.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/tongkat-ali.png" alt="Tongkat Ali">
+              <div class="ingredients-v2-card-content">
+                <h3>Tongkat Ali</h3>
+                <p>Dapat meningkatkan kadar testosteron dan kesuburan pada pria, mengurangi kelelahan dan meningkatkan daya tahan tubuh.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/habatussauda.jpg" alt="Habbatussauda">
+              <div class="ingredients-v2-card-content">
+                <h3>Habbatussauda</h3>
+                <p>Habbatussauda sebagai sumber antioksidan dan dapat membantu menjaga lapisan lambung, dapat meningkatkan kualitas sperma dan memperbaiki kualitas sperma.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/madu.jpg" alt="Madu">
+              <div class="ingredients-v2-card-content">
+                <h3>Madu</h3>
+                <p>Meningkatkan kadar adiponektin, yaitu hormon yang dapat mengurangi peradangan dan dapat menurunkan gula darah.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/kurma.jpg" alt="Kurma">
+              <div class="ingredients-v2-card-content">
+                <h3>Kurma</h3>
+                <p>Kurma memiliki kandungan asam amino dan seng, sehingga dapat meningkatkan kesuburan, terutama pada pria.</p>
+              </div>
+            </div>
+            <div class="ingredients-v2-card">
+              <img src="https://www.availacafe.com/assets/images/stevia.jpg" alt="Stevia">
+              <div class="ingredients-v2-card-content">
+                <h3>Stevia</h3>
+                <p>Pemanis alami zero kalori yang berasal dari tanaman Stevia Rebaudiana dan diekstrak menjadi pemanis yang tidak akan menambah kalori ke dalam tubuh sehingga lebih aman untuk kesehatan.</p>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Ask The Expert Video Slider -->
+    <section id="video" class="video-slider-section section-with-bg">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-coffee-dark mb-12 text-center">Semua Tentang Kopi, Jawaban dari Sang Pakar!</h1>
+        <div class="video-slider-container">
+            <div class="video-slider-track" id="expertVideoSlider">
+                <div class="video-slider-slide">
+                    <div id="player1" class="yt-player" data-video-id="vaX7-Kc37Z8"></div>
+                </div>
+                <div class="video-slider-slide">
+                    <div id="player2" class="yt-player" data-video-id="65kpShrDjUc"></div>
+                </div>
+            </div>
+        </div>
+        <div class="video-slider-nav">
+            <button id="expertPrevBtn">&#8592;</button>
+            <button id="expertNextBtn">&#8594;</button>
+        </div>
+    </section>
+
+    <!-- 7. Testimoni Video Slider -->
+    <section id="testimoni" class="video-slider-section section-with-bg">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-coffee-dark mb-12 text-center uppercase">Testimoni</h1>
+        <div class="video-slider-container">
+            <div class="video-slider-track" id="testimoniVideoSlider">
+                <div class="video-slider-slide">
+                    <div id="testimoni-player1" class="yt-player" data-video-id="YLrCOEZ_60g"></div>
+                </div>
+                <div class="video-slider-slide">
+                    <div id="testimoni-player2" class="yt-player" data-video-id="x4-jJWJQfmE"></div>
+                </div>
+                <div class="video-slider-slide">
+                    <div id="testimoni-player3" class="yt-player" data-video-id="vyI051NZjmA"></div>
+                </div>
+                <div class="video-slider-slide">
+                    <div id="testimoni-player4" class="yt-player" data-video-id="WVcv7YsiMXU"></div>
+                </div>
+            </div>
+        </div>
+        <div class="video-slider-nav">
+            <button id="testimoniPrevBtn">&#8592;</button>
+            <button id="testimoniNextBtn">&#8594;</button>
+        </div>
+    </section>
+    
+    <!-- 8. FAQ Section -->
+    <section id="faq" class="py-20 section-with-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-coffee-dark mb-12 text-center">
+                Pertanyaan yang Sering Diajukan
+            </h2>
+            <div class="faq-container mx-auto">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apa yang akan dirasakan oleh tubuh setelah mengonsumsi A'Cafe?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <ul class="list-disc pl-5 py-2 space-y-1">
+                            <li>Tubuh akan terasa lebih bertenaga</li>
+                            <li>Jantung akan memompa darah ke seluruh tubuh dengan maksimal</li>
+                            <li>Tubuh menjadi lebih rileks dan segar</li>
+                            <li>Gairah meningkat</li>
+                            <li>Menghilangkan nyeri-nyeri sendi pada tubuh</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah Avail A'cafe dapat dikonsumsi oleh Wanita?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-2">Ya, Avail A'cafe dapat dikonsumsi oleh wanita selama tidak ada alergi terhadap bahan-bahannya.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah Avail A'cafe aman dikonsumsi jangka panjang?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-2">Produk ini aman dikonsumsi sesuai takaran anjuran dan tidak berlebihan.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah saya harus mengonsumsi A'cafe setiap hari?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-2">Tergantung kebutuhan Anda. Konsumsi rutin dapat membantu menjaga stamina tubuh.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah A'cafe aman dikonsumsi untuk penderita lambung?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-2">Konsultasikan dengan dokter jika memiliki riwayat gangguan lambung sebelum konsumsi.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah A'cafe aman dikonsumsi penderita kronis seperti diabetes dan jantung?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-2">Untuk penderita kronis, sangat disarankan berkonsultasi dengan tenaga medis terlebih dahulu.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Bolehkah ibu hamil dan menyusui mengonsumsi A'cafe?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="py-2">Sebaiknya hindari konsumsi selama masa kehamilan dan menyusui kecuali atas saran dokter.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Pricing Section -->
+    <section id="harga" class="py-20 px-6 section-with-bg">
+        <div class="container mx-auto max-w-6xl text-center">
+             <h2 class="text-3xl md:text-4xl font-extrabold text-coffee-dark mb-4 uppercase">Harga Spesial A'Cafe</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">Investasi terbaik untuk stamina dan keharmonisan Anda. Dapatkan penawaran eksklusif kami hari ini!</p>
+
+            <div class="flex flex-wrap justify-center items-stretch gap-8">
+                <!-- Normal Price Card -->
+                <div class="w-full max-w-sm bg-white rounded-2xl shadow-lg border flex flex-col transform hover:scale-105 transition-transform duration-300">
+                    <div class="h-64 flex items-center justify-center p-4">
+                        <img src="https://www.availacafe.com/assets/page/Product.png" alt="Produk A'Cafe" class="max-h-full w-auto object-contain">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="font-bold text-2xl mb-2 text-gray-500">Harga Normal</h3>
+                        <p class="text-gray-500 mb-4">1 Box (Isi 5 Sachet)</p>
+                        <p class="text-4xl font-extrabold text-gray-500 my-4">Rp 275.000</p>
+                        <div class="flex-grow"></div>
+                        <a href="https://wa.me/6285266734449" target="_blank" class="block w-full text-center mt-6 bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-8 rounded-lg text-lg transition animate-glowing-pulse">
+                            Pesan Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Member Price Card (Featured) -->
+                <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl border-4 border-amber-500 flex flex-col relative transform scale-105">
+                    <div class="absolute -top-4 right-4 bg-amber-500 text-white text-sm font-bold px-4 py-1 rounded-full shadow-lg transform rotate-6">Penawaran Terbaik</div>
+                    <div class="h-64 flex items-center justify-center p-4">
+                        <img src="https://www.availacafe.com/assets/page/Product.png" alt="Produk A'Cafe" class="max-h-full w-auto object-contain">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="font-bold text-2xl mb-2 text-amber-800">Harga Member</h3>
+                        <p class="text-gray-500 mb-4">1 Box (Isi 5 Sachet)</p>
+                        <p class="text-5xl font-extrabold text-coffee-dark my-4">Rp 250.000</p>
+                        <p class="bg-green-100 text-green-700 font-bold py-2 px-4 rounded-lg my-4">Join Member GRATIS lho!</p>
+                        <div class="flex-grow"></div>
+                        <a href="https://wa.me/6285266734449" target="_blank" class="block w-full text-center mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition animate-glowing-pulse">
+                            Daftar & Pesan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 10. Cara Konsumsi Section -->
+    <section id="cara-konsumsi" class="py-20 px-6 section-with-bg">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-coffee-dark mb-12 text-center uppercase">
+                Cara Konsumsi Mudah
+            </h2>
+            <div class="w-full md:w-3/4 mx-auto bg-white p-6 rounded-2xl shadow-lg border">
+                <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1756979369/Screenshot_2025-09-02_at_10-55-58_A_Cafe_Landing_Page_wbw237.png" alt="Cara Penyajian A'Cafe" class="rounded-lg w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Final CTA & Footer Section -->
+    <footer id="kontak" class="bg-[#3e2f23] text-white">
+        <div class="container mx-auto px-6 py-16 text-center">
+            <img src="https://www.availacafe.com/assets/images/logo.png" alt="Logo A'Cafe" class="h-16 mb-6 mx-auto">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-amber-400 mb-4">Siap Merasakan Perbedaannya?</h2>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Jangan biarkan stamina menurun menghalangi keharmonisan Anda. Hubungi kami sekarang untuk konsultasi atau pemesanan.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
+                <!-- Left: Info -->
+                <div class="bg-black/20 p-6 rounded-lg text-left">
+                    <h4 class="font-bold mb-2 text-xl text-white">Informasi Reseller Resmi</h4>
+                    <p class="text-gray-300 text-sm mb-4">"dang usman & kak rosmeri"</p>
+                    <div class="border-t border-white/10 my-4"></div>
+                    <h4 class="font-bold mb-1 text-lg">Alamat:</h4>
+                    <p class="text-gray-300 text-sm mb-4">Kota Bengkulu, Provinsi Bengkulu, Indonesia</p>
+                    <h4 class="font-bold mt-4 mb-1 text-lg">Kontak:</h4>
+                    <div class="flex flex-col items-start gap-2 text-gray-300 text-sm">
+                         <a href="mailto:dangusman.suksess@gmail.com" class="flex items-center hover:text-white transition">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.5,4A1.5,1.5,0,0,0,1,5.5v13A1.5,1.5,0,0,0,2.5,20h19A1.5,1.5,0,0,0,23,18.5v-13A1.5,1.5,0,0,0,21.5,4H2.5ZM2.5,5h19a.5.5,0,0,1,.36.15L12.5,14.5a.5.5,0,0,1-.72,0L2.14,5.15A.5.5,0,0,1,2.5,5ZM2,6.44l7.25,6.67a1.5,1.5,0,0,0,2.16,0L19,6.44V18.5a.5.5,0,0,1-.5.5H2.5a.5.5,0,0,1-.5-.5V6.44Z"/></svg>
+                            <span>dangusman.suksess@gmail.com</span>
+                         </a>
+                         <a href="mailto:merisitumeang.sukses@gmail.com" class="flex items-center hover:text-white transition">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.5,4A1.5,1.5,0,0,0,1,5.5v13A1.5,1.5,0,0,0,2.5,20h19A1.5,1.5,0,0,0,23,18.5v-13A1.5,1.5,0,0,0,21.5,4H2.5ZM2.5,5h19a.5.5,0,0,1,.36.15L12.5,14.5a.5.5,0,0,1-.72,0L2.14,5.15A.5.5,0,0,1,2.5,5ZM2,6.44l7.25,6.67a1.5,1.5,0,0,0,2.16,0L19,6.44V18.5a.5.5,0,0,1-.5.5H2.5a.5.5,0,0,1-.5-.5V6.44Z"/></svg>
+                            <span>merisitumeang.sukses@gmail.com</span>
+                         </a>
+                    </div>
+                </div>
+                 <!-- Right Column: Image -->
+                <div class="flex items-center justify-center">
+                    <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1756979207/Image_copy_c7wtgb.png" alt="Banner Produk A'Cafe dengan Gelas Kopi" class="rounded-lg max-w-xs shadow-lg">
+                </div>
+            </div>
+        </div>
+        <div class="bg-black/50 text-center py-4 text-sm text-gray-400">
+            © 2025 A'Cafe - Dang Usman. All Rights Reserved.
+        </div>
+    </footer>
+
+
+    <!-- ====== STICKY FOOTER TICKER ====== -->
+    <footer class="sticky bottom-0 z-50">
+        <!-- Running Text / Promo Ticker -->
+        <div class="promo-ticker" role="status" aria-live="polite">
+          <div class="promo-track" id="promoTrack"></div>
+        </div>
+    </footer>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="hidden fixed bottom-20 md:bottom-5 right-5 bg-amber-500 hover:bg-amber-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-opacity duration-300 z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ====== SCRIPT UNTUK MENU MOBILE ======
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // ====== SCRIPT UNTUK PROMO TICKER ======
+        const track = document.getElementById("promoTrack");
+        if(track) {
+            const messages = [
+                "Cukup 1 sachet A’Cafe, efek terasa hingga 3 hari!",
+                "Dapatkan harga khusus member",
+                "Stamina kuat & tahan lama, buktikan sekarang!",
+                "Reseller Resmi Bengkulu QM. Rosmeri & QM. Dang Usman"
+            ];
+
+            function buildTicker(list) {
+                track.innerHTML = ''; // Clear previous content
+                
+                const createSequence = () => {
+                    const seq = document.createElement('div');
+                    seq.className = 'promo-seq';
+                    
+                    list.forEach(txt => {
+                        const messageEl = document.createElement('span');
+                        messageEl.innerHTML = `${txt} <span class="dot">•</span> <a class="promo-cta" href="#harga">KLIK ORDER</a>`;
+                        seq.appendChild(messageEl);
+                    });
+                    return seq;
+                };
+                
+                track.appendChild(createSequence());
+                track.appendChild(createSequence());
+            }
+
+            buildTicker(messages);
+
+            const mq = window.matchMedia("(max-width: 480px)");
+            function setSpeed(){ document.querySelector(".promo-ticker").style.setProperty("--speed", mq.matches ? "30s" : "45s"); }
+            setSpeed(); mq.addEventListener?.("change", setSpeed);
+        }
+
+        // ====== SCRIPT UNTUK FAQ ======
+        const questions = document.querySelectorAll('.faq-question');
+        questions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.faq-icon');
+                const isOpen = answer.classList.contains('open');
+
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.remove('open'));
+                document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('open'));
+                document.querySelectorAll('.faq-icon').forEach(ic => ic.textContent = '+');
+
+                if (!isOpen) {
+                    answer.classList.add('open');
+                    question.classList.add('open');
+                    icon.textContent = '−';
+                }
+            });
+        });
+        
+        // ====== SCRIPT UNTUK SCROLL TO TOP ======
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        if(scrollToTopBtn) {
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollToTopBtn.classList.remove('hidden');
+                } else {
+                    scrollToTopBtn.classList.add('hidden');
+                }
+            };
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // ====== SCRIPT UNTUK VISITOR COUNTER ======
+        const countElement = document.getElementById('visitor-count');
+        if (countElement) {
+            let visitorCount = localStorage.getItem('acafeVisitorCount');
+            
+            if (visitorCount === null) {
+                visitorCount = 1478 + Math.floor(Math.random() * 50); // Base number
+            } else {
+                visitorCount = parseInt(visitorCount);
+            }
+            
+            visitorCount++;
+            localStorage.setItem('acafeVisitorCount', visitorCount);
+            
+            countElement.textContent = visitorCount.toLocaleString('id-ID');
+
+            setInterval(() => {
+                const increment = Math.floor(Math.random() * 3) + 1;
+                visitorCount += increment;
+                countElement.textContent = visitorCount.toLocaleString('id-ID');
+            }, 5000 + Math.random() * 2000); // Update every 5-7 seconds
+        }
+    });
+
+    // ====== SCRIPT UNTUK SEMUA VIDEO SLIDER (GLOBAL SCOPE FOR YOUTUBE API)======
+    let allPlayers = {};
+
+    function createYouTubeSlider(config) {
+        const slider = document.getElementById(config.sliderId);
+        if (!slider) return; // Add guard clause
+        const allSlides = slider.querySelectorAll(config.slideSelector);
+        const prevBtn = document.getElementById(config.prevBtnId);
+        const nextBtn = document.getElementById(config.nextBtnId);
+        
+        let currentIndex = 0;
+        let autoplayInterval;
+
+        const activeSlides = Array.from(allSlides).filter(slide => {
+            const videoId = slide.querySelector('.yt-player')?.getAttribute('data-video-id');
+            const isPlaceholder = !videoId || videoId.startsWith('VIDEO_ID');
+            if (isPlaceholder) {
+                slide.style.display = 'none';
+            }
+            return !isPlaceholder;
+        });
+
+        const totalActiveSlides = activeSlides.length;
+
+        function getSlidesPerPage() {
+            return window.innerWidth < 900 ? 1 : 2;
+        }
+
+        function showSlide() {
+            const slidesPerPage = getSlidesPerPage();
+            if (totalActiveSlides === 0) return;
+            const slideWidth = activeSlides[0].clientWidth;
+            const maxIndex = totalActiveSlides - slidesPerPage;
+            
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
+            
+            slider.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+        }
+
+        function nextSlide() {
+            const slidesPerPage = getSlidesPerPage();
+            const maxIndex = totalActiveSlides - slidesPerPage;
+            if (maxIndex < 0) return;
+            currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0;
+            showSlide();
+        }
+
+        function prevSlide() {
+            const slidesPerPage = getSlidesPerPage();
+            const maxIndex = totalActiveSlides - slidesPerPage;
+            if (maxIndex < 0) return;
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex;
+            showSlide();
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayInterval);
+        }
+
+        function setupSliderControls() {
+            const slidesPerPage = getSlidesPerPage();
+            if (totalActiveSlides <= slidesPerPage) {
+                if(prevBtn) prevBtn.style.display = 'none';
+                if(nextBtn) nextBtn.style.display = 'none';
+                stopAutoplay();
+                slider.style.justifyContent = 'center';
+            } else {
+                if(prevBtn) prevBtn.style.display = 'flex';
+                if(nextBtn) nextBtn.style.display = 'flex';
+                startAutoplay();
+                slider.style.justifyContent = 'flex-start';
+            }
+            showSlide();
+        }
+
+        if(nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                stopAutoplay();
+                nextSlide();
+                startAutoplay();
+            });
+        }
+        
+        if(prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                stopAutoplay();
+                prevSlide();
+                startAutoplay();
+            });
+        }
+
+        window.addEventListener('resize', setupSliderControls);
+        
+        setupSliderControls();
+
+        return {
+            startAutoplay,
+            stopAutoplay,
+            activeSlides
+        };
+    }
+
+    let expertSliderInstance;
+    let testimoniSliderInstance;
+
+    function onYouTubeIframeAPIReady() {
+        expertSliderInstance = createYouTubeSlider({
+            sliderId: 'expertVideoSlider',
+            prevBtnId: 'expertPrevBtn',
+            nextBtnId: 'expertNextBtn',
+            slideSelector: '.video-slider-slide'
+        });
+
+        testimoniSliderInstance = createYouTubeSlider({
+            sliderId: 'testimoniVideoSlider',
+            prevBtnId: 'testimoniPrevBtn',
+            nextBtnId: 'testimoniNextBtn',
+            slideSelector: '.video-slider-slide'
+        });
+
+        const allPlayerDivs = document.querySelectorAll('.yt-player');
+        allPlayerDivs.forEach(playerDiv => {
+            const videoId = playerDiv.getAttribute('data-video-id');
+            if (videoId && !videoId.startsWith('VIDEO_ID')) {
+                allPlayers[playerDiv.id] = new YT.Player(playerDiv.id, {
+                    videoId: videoId,
+                    events: { 'onStateChange': onPlayerStateChange }
+                });
+            }
+        });
+    }
+
+    function onPlayerStateChange(event) {
+        const iframe = event.target.getIframe();
+        if (!iframe) return;
+        const sliderInstance = iframe.closest('#testimoni') ? testimoniSliderInstance : expertSliderInstance;
+        if (!sliderInstance) return;
+
+        if (event.data == YT.PlayerState.PLAYING) {
+            sliderInstance.stopAutoplay();
+        } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+            sliderInstance.startAutoplay();
+        }
+    }
+        
+    </script>
+
+</body>
+</html>
+
