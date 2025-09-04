@@ -416,7 +416,7 @@
                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                             <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.022 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                         </svg>
-                        Telah Dilihat <span id="visitor-count" class="font-bold text-white">...</span> Kali
+                        Telah Dilihat <span id="counter" class="font-bold text-white">...</span> Kali
                     </div>
                 </div>
                 <!-- Image Content -->
@@ -1047,16 +1047,18 @@
     
     <script src="https://www.youtube.com/iframe_api"></script>
     
-    <!-- Firebase SDK -->
+    <!-- Firebase and Page Scripts -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, increment, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        // PERHATIAN: Sila pastikan anda telah melakukan perkara berikut di Firebase Console:
+        // 1. BUAT PANGKALAN DATA: Pergi ke Build -> Firestore Database -> Create database.
+        // 2. KEMAS KINI RULES: Di tab 'Rules', pastikan ia membenarkan 'read' dan 'write'.
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } 
+            from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
-        // ====================================================================================
-        // Konfigurasi Firebase Anda
-        // ====================================================================================
+        // 🔥 Konfigurasi Firebase anda
         const firebaseConfig = {
             apiKey: "AIzaSyAWN7LAc_TwGvoJ3zNq2-JfoVgKOC42Eqc",
             authDomain: "acafebengkulu-website.firebaseapp.com",
@@ -1066,288 +1068,294 @@
             appId: "1:942984195868:web:3f48b82d254024ff1bd4d9",
             measurementId: "G-HRG85S0FTH"
         };
-        // ====================================================================================
-        
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const analytics = getAnalytics(app);
 
-        // Fungsi untuk menambah dan menampilkan jumlah pengunjung
-        async function updateVisitorCount() {
-            const countElement = document.getElementById('visitor-count');
-            if (!countElement) return;
+        // =====================================================================
+        // FUNGSI UTAMA HALAMAN (dijalankan selepas halaman dimuat)
+        // =====================================================================
+        document.addEventListener('DOMContentLoaded', function() {
             
-            const counterRef = doc(db, "visitorCounters", "pageViews");
-
+            // --- LOGIK UNTUK PEMBILANG PENGUNJUNG ---
             try {
-                await runTransaction(db, async (transaction) => {
-                    const counterDoc = await transaction.get(counterRef);
-                    if (!counterDoc.exists()) {
-                        transaction.set(counterRef, { count: 1 });
-                        countElement.textContent = '1';
-                    } else {
-                        const newCount = counterDoc.data().count + 1;
-                        transaction.update(counterRef, { count: newCount });
-                        countElement.textContent = newCount.toLocaleString('id-ID');
-                    }
-                });
+                console.log("Mencuba memulakan Firebase...");
+                const app = initializeApp(firebaseConfig);
+                const analytics = getAnalytics(app); // Diperlukan untuk beberapa projek
+                const db = getFirestore(app);
+                console.log("Firebase berjaya dimulakan.");
+                updateCounter(db); 
             } catch (e) {
-                console.error("Gagal memperbarui jumlah pengunjung:", e);
-                // Jika gagal, coba tampilkan data terakhir yang tersimpan
-                try {
-                    const docSnap = await getDoc(counterRef);
-                    if (docSnap.exists()) {
-                        countElement.textContent = docSnap.data().count.toLocaleString('id-ID');
-                    } else {
-                        countElement.textContent = 'N/A';
-                    }
-                } catch (readError) {
-                    console.error("Gagal membaca data pengunjung:", readError);
-                    countElement.textContent = 'Error';
+                console.error("Gagal memulakan Firebase:", e);
+                const counterElement = document.getElementById("counter");
+                if (counterElement) {
+                    counterElement.innerText = "Init Fail";
                 }
             }
-        }
+
+            // --- FUNGSI UNTUK MENGEMAS KINI PEMBILANG ---
+            async function updateCounter(db) {
+                const counterRef = doc(db, "counters", "visitors");
+                const counterElement = document.getElementById("counter");
+
+                if (!counterElement) {
+                    console.error("Elemen dengan ID 'counter' tidak ditemui.");
+                    return;
+                }
+
+                try {
+                    console.log("Mencuba mendapatkan data dari Firestore...");
+                    const snapshot = await getDoc(counterRef);
+                    console.log("Berjaya mendapat balasan dari Firestore.");
+
+                    if (!snapshot.exists()) {
+                        await setDoc(counterRef, { count: 1 });
+                        counterElement.innerText = "1";
+                    } else {
+                        await updateDoc(counterRef, { count: increment(1) });
+                        const newSnap = await getDoc(counterRef);
+                        counterElement.innerText = newSnap.data().count.toLocaleString('id-ID');
+                    }
+                    console.log("Pembilang berjaya dikemas kini.");
+                } catch (error) {
+                    console.error("Ralat mengemas kini pembilang:", error);
+                    counterElement.innerText = "Error";
+                    if (error.code === 'unavailable' || error.message.includes('offline')) {
+                        console.warn("PANDUAN: Ralat 'offline' biasanya bermaksud: 1) Pangkalan data Firestore belum dibuat di Firebase Console. 2) Terdapat kesilapan pada 'projectId' dalam konfigurasi anda.");
+                    } else if (error.code === 'permission-denied') {
+                         console.warn("PANDUAN: Ralat 'permission-denied' bermaksud anda perlu kemas kini 'Security Rules' di Firebase Console anda.");
+                    }
+                }
+            }
+
+            // --- SKRIP LAIN UNTUK FUNGSI HALAMAN ---
+            
+            // Menu Mobile
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Promo Ticker
+            const track = document.getElementById("promoTrack");
+            if(track) {
+                const messages = [
+                    "Cukup 1 sachet A’Cafe, efek terasa hingga 3 hari!",
+                    "Dapatkan harga khusus member",
+                    "Stamina kuat & tahan lama, buktikan sekarang!",
+                    "Reseller Resmi Bengkulu QM. Rosmeri & QM. Dang Usman"
+                ];
+
+                function buildTicker(list) {
+                    track.innerHTML = ''; 
+                    const createSequence = () => {
+                        const seq = document.createElement('div');
+                        seq.className = 'promo-seq';
+                        list.forEach(txt => {
+                            const messageEl = document.createElement('span');
+                            messageEl.innerHTML = `${txt} <span class="dot">•</span> <a class="promo-cta" href="#harga">KLIK ORDER</a>`;
+                            seq.appendChild(messageEl);
+                        });
+                        return seq;
+                    };
+                    track.appendChild(createSequence());
+                    track.appendChild(createSequence());
+                }
+
+                buildTicker(messages);
+                const mq = window.matchMedia("(max-width: 480px)");
+                function setSpeed(){ document.querySelector(".promo-ticker").style.setProperty("--speed", mq.matches ? "30s" : "45s"); }
+                setSpeed(); mq.addEventListener?.("change", setSpeed);
+            }
+
+            // FAQ
+            const questions = document.querySelectorAll('.faq-question');
+            questions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('.faq-icon');
+                    const isOpen = answer.classList.contains('open');
+
+                    document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.remove('open'));
+                    document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('open'));
+                    document.querySelectorAll('.faq-icon').forEach(ic => ic.textContent = '+');
+
+                    if (!isOpen) {
+                        answer.classList.add('open');
+                        question.classList.add('open');
+                        icon.textContent = '−';
+                    }
+                });
+            });
         
-        // Panggil fungsi saat halaman dimuat
-        updateVisitorCount();
+            // Scroll to Top
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            if(scrollToTopBtn) {
+                window.onscroll = function() {
+                    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                        scrollToTopBtn.classList.remove('hidden');
+                    } else {
+                        scrollToTopBtn.classList.add('hidden');
+                    }
+                };
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        }); 
     </script>
     
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // ====== SCRIPT UNTUK MENU MOBILE ======
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if(menuBtn) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+        // Skrip Youtube API perlu berada di skop global dan tidak boleh dalam 'module'
+        let allPlayers = {};
+
+        function createYouTubeSlider(config) {
+            const slider = document.getElementById(config.sliderId);
+            if (!slider) return; 
+            const allSlides = slider.querySelectorAll(config.slideSelector);
+            const prevBtn = document.getElementById(config.prevBtnId);
+            const nextBtn = document.getElementById(config.nextBtnId);
+            
+            let currentIndex = 0;
+            let autoplayInterval;
+
+            const activeSlides = Array.from(allSlides).filter(slide => {
+                const videoId = slide.querySelector('.yt-player')?.getAttribute('data-video-id');
+                const isPlaceholder = !videoId || videoId.startsWith('VIDEO_ID');
+                if (isPlaceholder) {
+                    slide.style.display = 'none';
+                }
+                return !isPlaceholder;
             });
-        }
 
-        // ====== SCRIPT UNTUK PROMO TICKER ======
-        const track = document.getElementById("promoTrack");
-        if(track) {
-            const messages = [
-                "Cukup 1 sachet A’Cafe, efek terasa hingga 3 hari!",
-                "Dapatkan harga khusus member",
-                "Stamina kuat & tahan lama, buktikan sekarang!",
-                "Reseller Resmi Bengkulu QM. Rosmeri & QM. Dang Usman"
-            ];
+            const totalActiveSlides = activeSlides.length;
 
-            function buildTicker(list) {
-                track.innerHTML = ''; // Clear previous content
-                
-                const createSequence = () => {
-                    const seq = document.createElement('div');
-                    seq.className = 'promo-seq';
-                    
-                    list.forEach(txt => {
-                        const messageEl = document.createElement('span');
-                        messageEl.innerHTML = `${txt} <span class="dot">•</span> <a class="promo-cta" href="#harga">KLIK ORDER</a>`;
-                        seq.appendChild(messageEl);
-                    });
-                    return seq;
-                };
-                
-                track.appendChild(createSequence());
-                track.appendChild(createSequence());
+            function getSlidesPerPage() {
+                return window.innerWidth < 900 ? 1 : 2;
             }
 
-            buildTicker(messages);
+            function showSlide() {
+                const slidesPerPage = getSlidesPerPage();
+                if (totalActiveSlides === 0) return;
+                const slideWidth = activeSlides[0].clientWidth;
+                const maxIndex = totalActiveSlides - slidesPerPage;
+                
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+                if (currentIndex < 0) currentIndex = 0;
+                
+                slider.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+            }
 
-            const mq = window.matchMedia("(max-width: 480px)");
-            function setSpeed(){ document.querySelector(".promo-ticker").style.setProperty("--speed", mq.matches ? "30s" : "45s"); }
-            setSpeed(); mq.addEventListener?.("change", setSpeed);
-        }
+            function nextSlide() {
+                const slidesPerPage = getSlidesPerPage();
+                const maxIndex = totalActiveSlides - slidesPerPage;
+                if (maxIndex < 0) return;
+                currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0;
+                showSlide();
+            }
 
-        // ====== SCRIPT UNTUK FAQ ======
-        const questions = document.querySelectorAll('.faq-question');
-        questions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('.faq-icon');
-                const isOpen = answer.classList.contains('open');
+            function prevSlide() {
+                const slidesPerPage = getSlidesPerPage();
+                const maxIndex = totalActiveSlides - slidesPerPage;
+                if (maxIndex < 0) return;
+                currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex;
+                showSlide();
+            }
 
-                document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.remove('open'));
-                document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('open'));
-                document.querySelectorAll('.faq-icon').forEach(ic => ic.textContent = '+');
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayInterval = setInterval(nextSlide, 5000);
+            }
 
-                if (!isOpen) {
-                    answer.classList.add('open');
-                    question.classList.add('open');
-                    icon.textContent = '−';
-                }
-            });
-        });
-        
-        // ====== SCRIPT UNTUK SCROLL TO TOP ======
-        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-        if(scrollToTopBtn) {
-            window.onscroll = function() {
-                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                    scrollToTopBtn.classList.remove('hidden');
+            function stopAutoplay() {
+                clearInterval(autoplayInterval);
+            }
+
+            function setupSliderControls() {
+                const slidesPerPage = getSlidesPerPage();
+                if (totalActiveSlides <= slidesPerPage) {
+                    if(prevBtn) prevBtn.style.display = 'none';
+                    if(nextBtn) nextBtn.style.display = 'none';
+                    stopAutoplay();
+                    slider.style.justifyContent = 'center';
                 } else {
-                    scrollToTopBtn.classList.add('hidden');
+                    if(prevBtn) prevBtn.style.display = 'flex';
+                    if(nextBtn) nextBtn.style.display = 'flex';
+                    startAutoplay();
+                    slider.style.justifyContent = 'flex-start';
                 }
-            };
-
-            scrollToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-    });
-
-    // ====== SCRIPT UNTUK SEMUA VIDEO SLIDER (GLOBAL SCOPE FOR YOUTUBE API)======
-    let allPlayers = {};
-
-    function createYouTubeSlider(config) {
-        const slider = document.getElementById(config.sliderId);
-        if (!slider) return; // Add guard clause
-        const allSlides = slider.querySelectorAll(config.slideSelector);
-        const prevBtn = document.getElementById(config.prevBtnId);
-        const nextBtn = document.getElementById(config.nextBtnId);
-        
-        let currentIndex = 0;
-        let autoplayInterval;
-
-        const activeSlides = Array.from(allSlides).filter(slide => {
-            const videoId = slide.querySelector('.yt-player')?.getAttribute('data-video-id');
-            const isPlaceholder = !videoId || videoId.startsWith('VIDEO_ID');
-            if (isPlaceholder) {
-                slide.style.display = 'none';
+                showSlide();
             }
-            return !isPlaceholder;
-        });
 
-        const totalActiveSlides = activeSlides.length;
-
-        function getSlidesPerPage() {
-            return window.innerWidth < 900 ? 1 : 2;
-        }
-
-        function showSlide() {
-            const slidesPerPage = getSlidesPerPage();
-            if (totalActiveSlides === 0) return;
-            const slideWidth = activeSlides[0].clientWidth;
-            const maxIndex = totalActiveSlides - slidesPerPage;
-            
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-            if (currentIndex < 0) currentIndex = 0;
-            
-            slider.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
-        }
-
-        function nextSlide() {
-            const slidesPerPage = getSlidesPerPage();
-            const maxIndex = totalActiveSlides - slidesPerPage;
-            if (maxIndex < 0) return;
-            currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0;
-            showSlide();
-        }
-
-        function prevSlide() {
-            const slidesPerPage = getSlidesPerPage();
-            const maxIndex = totalActiveSlides - slidesPerPage;
-            if (maxIndex < 0) return;
-            currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex;
-            showSlide();
-        }
-
-        function startAutoplay() {
-            stopAutoplay();
-            autoplayInterval = setInterval(nextSlide, 5000);
-        }
-
-        function stopAutoplay() {
-            clearInterval(autoplayInterval);
-        }
-
-        function setupSliderControls() {
-            const slidesPerPage = getSlidesPerPage();
-            if (totalActiveSlides <= slidesPerPage) {
-                if(prevBtn) prevBtn.style.display = 'none';
-                if(nextBtn) nextBtn.style.display = 'none';
-                stopAutoplay();
-                slider.style.justifyContent = 'center';
-            } else {
-                if(prevBtn) prevBtn.style.display = 'flex';
-                if(nextBtn) nextBtn.style.display = 'flex';
-                startAutoplay();
-                slider.style.justifyContent = 'flex-start';
-            }
-            showSlide();
-        }
-
-        if(nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                stopAutoplay();
-                nextSlide();
-                startAutoplay();
-            });
-        }
-        
-        if(prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                stopAutoplay();
-                prevSlide();
-                startAutoplay();
-            });
-        }
-
-        window.addEventListener('resize', setupSliderControls);
-        
-        setupSliderControls();
-
-        return {
-            startAutoplay,
-            stopAutoplay,
-            activeSlides
-        };
-    }
-
-    let expertSliderInstance;
-    let testimoniSliderInstance;
-
-    function onYouTubeIframeAPIReady() {
-        expertSliderInstance = createYouTubeSlider({
-            sliderId: 'expertVideoSlider',
-            prevBtnId: 'expertPrevBtn',
-            nextBtnId: 'expertNextBtn',
-            slideSelector: '.video-slider-slide'
-        });
-
-        testimoniSliderInstance = createYouTubeSlider({
-            sliderId: 'testimoniVideoSlider',
-            prevBtnId: 'testimoniPrevBtn',
-            nextBtnId: 'testimoniNextBtn',
-            slideSelector: '.video-slider-slide'
-        });
-
-        const allPlayerDivs = document.querySelectorAll('.yt-player');
-        allPlayerDivs.forEach(playerDiv => {
-            const videoId = playerDiv.getAttribute('data-video-id');
-            if (videoId && !videoId.startsWith('VIDEO_ID')) {
-                allPlayers[playerDiv.id] = new YT.Player(playerDiv.id, {
-                    videoId: videoId,
-                    events: { 'onStateChange': onPlayerStateChange }
+            if(nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    stopAutoplay();
+                    nextSlide();
+                    startAutoplay();
                 });
             }
-        });
-    }
+            
+            if(prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    stopAutoplay();
+                    prevSlide();
+                    startAutoplay();
+                });
+            }
 
-    function onPlayerStateChange(event) {
-        const iframe = event.target.getIframe();
-        if (!iframe) return;
-        const sliderInstance = iframe.closest('#testimoni') ? testimoniSliderInstance : expertSliderInstance;
-        if (!sliderInstance) return;
+            window.addEventListener('resize', setupSliderControls);
+            
+            setupSliderControls();
 
-        if (event.data == YT.PlayerState.PLAYING) {
-            sliderInstance.stopAutoplay();
-        } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
-            sliderInstance.startAutoplay();
+            return {
+                startAutoplay,
+                stopAutoplay,
+                activeSlides
+            };
         }
-    }
-        
+
+        let expertSliderInstance;
+        let testimoniSliderInstance;
+
+        function onYouTubeIframeAPIReady() {
+            expertSliderInstance = createYouTubeSlider({
+                sliderId: 'expertVideoSlider',
+                prevBtnId: 'expertPrevBtn',
+                nextBtnId: 'expertNextBtn',
+                slideSelector: '.video-slider-slide'
+            });
+
+            testimoniSliderInstance = createYouTubeSlider({
+                sliderId: 'testimoniVideoSlider',
+                prevBtnId: 'testimoniPrevBtn',
+                nextBtnId: 'testimoniNextBtn',
+                slideSelector: '.video-slider-slide'
+            });
+
+            const allPlayerDivs = document.querySelectorAll('.yt-player');
+            allPlayerDivs.forEach(playerDiv => {
+                const videoId = playerDiv.getAttribute('data-video-id');
+                if (videoId && !videoId.startsWith('VIDEO_ID')) {
+                    allPlayers[playerDiv.id] = new YT.Player(playerDiv.id, {
+                        videoId: videoId,
+                        events: { 'onStateChange': onPlayerStateChange }
+                    });
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            const iframe = event.target.getIframe();
+            if (!iframe) return;
+            const sliderInstance = iframe.closest('#testimoni') ? testimoniSliderInstance : expertSliderInstance;
+            if (!sliderInstance) return;
+
+            if (event.data == YT.PlayerState.PLAYING) {
+                sliderInstance.stopAutoplay();
+            } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+                sliderInstance.startAutoplay();
+            }
+        }
     </script>
 
 </body>
