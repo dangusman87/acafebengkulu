@@ -329,20 +329,24 @@
             z-index: -1;
         }
 
-        /* Animation for glowing buttons */
-        @keyframes glowing-pulse {
+        /* Animation for glowing WA buttons */
+        @keyframes glowing-whatsapp {
             0% {
-                box-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24;
+                box-shadow: 0 0 5px #25D366, 0 0 10px #25D366;
+                transform: scale(1.0);
             }
             50% {
-                box-shadow: 0 0 20px #fde68a, 0 0 30px #fde68a;
+                box-shadow: 0 0 20px #4ADE80, 0 0 30px #4ADE80;
+                transform: scale(1.03);
             }
             100% {
-                box-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24;
+                box-shadow: 0 0 5px #25D366, 0 0 10px #25D366;
+                transform: scale(1.0);
             }
         }
-        .animate-glowing-pulse {
-            animation: glowing-pulse 1.8s infinite ease-in-out;
+        .animate-glowing-whatsapp {
+            animation: glowing-whatsapp 1.5s infinite ease-in-out;
+            border-radius: 12px; /* Disesuaikan agar pas dengan gambar tombol */
         }
     </style>
 </head>
@@ -952,8 +956,8 @@
                         <p class="text-gray-500 mb-4">1 Box (Isi 5 Sachet)</p>
                         <p class="text-4xl font-extrabold text-gray-500 my-4">Rp 275.000</p>
                         <div class="flex-grow"></div>
-                        <a href="https://wa.me/6285266734449" target="_blank" class="block w-full text-center mt-6 bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-8 rounded-lg text-lg transition animate-glowing-pulse">
-                            Pesan Sekarang
+                        <a href="https://wa.me/6285266734449" target="_blank" class="block w-full mt-6 transition-transform duration-300 ease-in-out hover:scale-105">
+                            <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1757388245/Screenshot_2025-09-09_at_10-23-50_wa.png_Gambar_PNG_Image_800_244_piksel_zlduio.png" alt="Pesan via WhatsApp" class="w-full animate-glowing-whatsapp">
                         </a>
                     </div>
                 </div>
@@ -970,8 +974,8 @@
                         <p class="text-5xl font-extrabold text-coffee-dark my-4">Rp 250.000</p>
                         <p class="bg-green-100 text-green-700 font-bold py-2 px-4 rounded-lg my-4">Join Member GRATIS lho!</p>
                         <div class="flex-grow"></div>
-                        <a href="https://wa.me/6285266734449" target="_blank" class="block w-full text-center mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition animate-glowing-pulse">
-                            Daftar & Pesan
+                        <a href="https://wa.me/6285266734449" target="_blank" class="block w-full mt-6 transition-transform duration-300 ease-in-out hover:scale-105">
+                            <img src="https://res.cloudinary.com/dqfpjrpux/image/upload/v1757388245/Screenshot_2025-09-09_at_10-23-50_wa.png_Gambar_PNG_Image_800_244_piksel_zlduio.png" alt="Pesan via WhatsApp" class="w-full animate-glowing-whatsapp">
                         </a>
                     </div>
                 </div>
